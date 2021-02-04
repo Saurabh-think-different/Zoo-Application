@@ -1,0 +1,80 @@
+<section>
+<br>
+<h2 class="container">Book Ticket</h2>
+
+    <form class="container" action="/tickets_bookTicket" method="POST">
+      <table>
+         <tr>
+           <td>
+             First name:
+           </td>
+           <td>
+             <input type="text" name="fname" value="">
+           </td>
+           <td>
+             Last name:
+             <input type="text" name="lname" value="">
+           </td>
+         </tr>
+         <tr>
+           <td>
+             Gender:
+           </td>
+           <td>
+             <input type="radio" name="gender" value="M">Male
+             <input type="radio" name="gender" value="F">Female
+           </td>
+         </tr>
+         <tr>
+           <td>
+             E-mail ID:
+           </td>
+           <td>
+             <input type="email" name="email" value="">
+           </td>
+         </tr>
+         <tr>
+           <td>
+             Phone no.:
+           </td>
+           <td>
+             <input type="Phone" name="phone" value="">
+           </td>
+         </tr>
+         <tr>
+           <td>
+             Package:
+           </td>
+           
+           <td>
+             Normal: <input type="number" name="normal" value="0">
+           </td>
+         </tr>
+         <tr>
+           <td>
+           </td>
+           
+           <td>
+             Supreme: <input type="number" name="supreme" value="0">
+           </td>
+         </tr>
+         <tr>
+           <td>
+             Date:
+           </td>
+           <td>
+             From:
+             <input type="Date" name="datefrom"  required>
+           </td>
+           <td>
+             To:
+             <input type="Date" name="dateto" value="" required>
+           </td>
+         </tr>
+      </table>
+      <button type="submit">Submit</button>
+      <br>
+    </form>
+<br>
+      
+</section>

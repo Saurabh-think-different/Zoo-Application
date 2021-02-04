@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="description" content="Zoo DBMS Mini Project">
+    <meta name="keywords" content="Zoo DBMS, Mini Project">
+    <meta name="author" content="ven.ugo Saurabh">
+    
+    <% if (isadmin) { %>
+      <title>Zoo Admin | <%= titletag %> </title>
+    <% } %>
+    
+    <title>Zoo DBMS | <%= titletag %> </title>
+  
+    <link rel="stylesheet" href="/public/css/styles.css">
+  </head>
+  <body>
+    <% if (isadmin) { %>
+      <%- include("../partials/adminHeader.ejs") %>
+    <% } else { %>
+      <%- include("../partials/header.ejs") %> 
+
+    <% } %>
+   
+      
+        <%- body %> 
+    <%- include("../partials/footer.ejs") %> 
+    </body>
+  </html>
