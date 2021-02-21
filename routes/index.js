@@ -1,19 +1,17 @@
 const express = require('express')
 const mysql = require('mysql')
 
-let  empID = 10
-let aniID = 2
-
 //const con = require('../connection')
 
 const conn = mysql.createConnection({
-    host     : process.env.DB_HOST,
-    user     : process.env.DB_USER,
-    password : process.env.DB_PASS,
-    database : process.env.DB_NAME,
+    host     : "localhost",
+    user     : "root",
+    password : "Sausam123",
+    database : "emp",
     multipleStatements : true,
     insecureAuth : true
 })
+
 
 const index = express.Router()
 
@@ -110,38 +108,44 @@ index.get('/employee', (req, res) => {
 
 index.get('/emp_add', (req, res) => {
     res.render('employee/add', {titletag: "Emp Add", isadmin: true})
+   // res.render('employee/addedemp', {titletag: "Emp Add", isadmin: true, data: {fname: "sau", lname: "bha"}, empID: 13})
 })
 
 index.post('/emp_add', (req, res) => {
-    
+
     const data = req.body
-    data.empID = "emp" + empID
-    const sql = `INSERT INTO employee (Fname, Lname, Gender, House_no, St_name, Area, City, Zipcode, Ph_no, DOB, Dept_ID, Salary, Emp_ID) VALUES ("${data.fname}", "${data.lname}", "${data.gender}", ${data.house}, "${data.st_name}", "${data.area}", "${data.city}", ${data.zip}, ${data.phone}, "${data.dob}", "${data.deptID}", ${data.salary}, "${data.empID}" )`
-    
+    let empID = 0
+    // data.empID = "emp" + empID
+    const sql = `INSERT INTO employee (fName, lName, gender, HNo, stName, area, city, zip, phone, dob, dept, salary ) VALUES ("${data.fname}", "${data.lname}", "${data.gender}", ${data.house}, "${data.st_name}", "${data.area}", "${data.city}", ${data.zip}, ${data.phone}, "${data.dob}", "${data.deptID}", ${data.salary} )`
+    const sql2 = `select (empID) as empID from employee order by empID desc limit 1;` //Last emp inserted
+    conn.query(sql2, (err, res) => {
+        if(err) throw err;
+        empID = Number(res[0].empID) + 1
+        console.log("res empid", empID)
+    })
     conn.query(sql,  (err, result)=> {
         if (err) throw err;
-        res.send("done!")
-        empID += 1
-        console.log("Number of employee records inserted: " + result.affectedRows);
+        res.render('employee/addedemp', {titletag: "Emp Add", isadmin: true, data: data, empID: empID})
+        // empID += 1
+        //console.log("Number of employee records inserted: " + result.affectedRows);
       });
 })
 
 index.get('/emp_view', (req, res) => {
     const sql = `SELECT * FROM employee;`
     const rest =  conn.query(sql, (err, result) =>{
-        if(err) throw err
-        res.send(result[0])
-        //res.render('tickets/viewTicket/', {data: result})
+        if(err) throw err;
+        res.send(JSON.stringify(result))
     })
 })
 
 
 index.get('/emp_view/:id', (req, res) => {
     const id = req.params.id
-    const sql = `SELECT * FROM employee WHERE Emp_ID = "${id}";`
+    const sql = `SELECT * FROM employee WHERE empID = ${id};`
     const rest =  conn.query(sql, (err, result) =>{
         if(err) throw err
-        res.send(result)
+        res.send(result[0])
         //res.render('tickets/viewTicket/', {data: result})
     })
 })
@@ -156,11 +160,6 @@ index.post('/emp_modify', (req, res) => {
 
 index.get('/emp_search', (req, res) => {
     res.render('employee/search', {titletag: "Emp Search", isadmin: true})
-})
-
-index.post('/emp_search', (req, res) => {
-    const empID = req.body.empid
-    res.redirect(`/emp_view/${empID}`)
 })
 
 
