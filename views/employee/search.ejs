@@ -1,82 +1,38 @@
+<br>
 <h2 class="container">Search Employee</h2>
 
   <div class="container">
     <br>
     <form action="/emp_search" method="get">
-        Enter EmpID:<input type="text" name="empid" value="">
-        <button type="submit">Search</button>
+      <label class="form-label">Enter EmpID :</label> 
+        <input type="text" name="empid" class="form-control" value="">
+        <br>
+        <button type="submit" class="btn btn-dark">Search</button>
     </form>
     <br>
+    <div class="table-responsive">
+      <table class="empsearchtable table table-bordered ">
+        <thead class="table-dark">
+          <th>EmpID</th>
+          <th>FName</th>
+          <th>LName</th>
+          <th>Gender</th>
+          <th>House No</th>
+          <th>Street Name</th>
+          <th>Area</th>
+          <th>City</th>
+          <th>Zip</th>
+          <th>Phone</th>
+          <th>DOB</th>
+          <th>Dept</th>
+          <th>Salary</th>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+      <br>
+    </div>
     
-    <table class="empsearchtable">
-      <thead>
-        <th>EmpID</th>
-        <th>FName</th>
-        <th>LName</th>
-        <th>Gender</th>
-        <th>House No</th>
-        <th>Street Name</th>
-        <th>Area</th>
-        <th>City</th>
-        <th>Zip</th>
-        <th>Phone</th>
-        <th>DOB</th>
-        <th>Dept</th>
-        <th>Salary</th>
-      </thead>
-      <tbody>
-      </tbody>
-    </table>
   </div>
-
-<!-- <script>
-  const table = document.querySelector('.empsearchtable')
-  const tablebody = document.querySelector('tbody')
-
-  const emps = [
-    {
-        "empID": 1,
-        "fName": "sau",
-        "lName": "bha",
-        "gender": "m",
-        "HNo": 1327,
-        "stName": "40ft rd",
-        "area": "jp nagar 8th phase",
-        "city": "bangalore",
-        "zip": 560083,
-        "phone": "1234",
-        "dob": "2000-03-21T18:30:00.000Z",
-        "dept": "emp",
-        "salary": 123
-    },
-    {
-        "empID": 2,
-        "fName": "Saurabh",
-        "lName": "Bharadwaj",
-        "gender": "M",
-        "HNo": 23,
-        "stName": "sdf",
-        "area": "sdf",
-        "city": "BENGALURU",
-        "zip": 560083,
-        "phone": "6362773611",
-        "dob": "2021-02-02T18:30:00.000Z",
-        "dept": "KEP45",
-        "salary": 123
-    }
-  ]
-  
-  emps.forEach(emp => {
-    const row = document.createElement('tr')
-    Object.keys(emp).forEach((key) => {
-      const td = document.createElement('td')
-      const t = document.createTextNode(emp[key])
-      td.appendChild(t)
-      row.appendChild(td)
-    });
-    tablebody.appendChild(row)
-  })
-
-</script> -->
 
 <script src="/public/js/search.js"></script>

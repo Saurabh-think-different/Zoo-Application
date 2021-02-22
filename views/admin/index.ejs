@@ -1,5 +1,10 @@
 <section id="showcase">
     <div class="container">
-      <h1>Number of Tickets sold: <%= tickets%></h1>
+      <h1>Number of Tickets sold Today: <span><%= Number(data[0].cn) + Number(data[0].cs)%></span></h1>
+      <div class="typeoftickets">
+        <h1>Normal Tickets: <%= data[0].cn %></h1>
+        <h1>Supreme Tickets: <%= data[0].cs %></h1>
+        <h1>Revenue earned Today: Rs. <%= data[0].sum %></h1>
+      </div>
     </div>
   </section>

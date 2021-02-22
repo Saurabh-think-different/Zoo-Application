@@ -1,0 +1,50 @@
+<form class="container" method="POST" action="/report">
+  <table>
+     <tr>
+       <td>
+         Generate report  
+       </td>
+       <td>
+         From:
+         <input type="Date" name="datefrom" value="">
+       </td>
+       <td>
+         To:
+         <input type="Date" name="dateto" value="">
+       </td>
+     </tr>
+  </table>
+  <button type="submit" class="btn btn-primary" id="mybtn">Submit</button> 
+</form>
+
+<div class="table-responsive">
+    <table class="anisearchtable table table-bordered ">
+      <thead class="table-dark">
+        <th>Ticket No</th>
+        <th>Normal</th>
+        <th>Supreme</th>
+        <th>Date From</th>
+        <th>Date To</th>
+        <th>Date Booked</th>
+        <th>Amount</th>
+      </thead>
+      <tbody>
+        
+          
+          <% for( let i = 0; i < report.length; i++ ) { %>
+            <tr>
+              <td><%= report[i].ticketno %> </td>
+              <td><%= report[i].normal %> </td>
+              <td><%= report[i].supreme %> </td>
+              <td><%= new Intl.DateTimeFormat('en-GB', { year: 'numeric', month: 'long', day: '2-digit'}).format(report[i].datefrom) %> </td>
+              <td><%= new Intl.DateTimeFormat('en-GB', { year: 'numeric', month: 'long', day: '2-digit'}).format(report[i].dateto) %> </td>
+              <td><%= new Intl.DateTimeFormat('en-GB', { year: 'numeric', month: 'long', day: '2-digit'}).format(report[i].datebooked) %> </td>
+              <td><%= report[i].amount %> </td>
+            </tr>
+          <% } %>
+            
+          
+      </tbody>
+    </table>
+    <br>
+  </div>

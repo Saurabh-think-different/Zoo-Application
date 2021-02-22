@@ -4,9 +4,31 @@
         <br>
         <form action="/animals_search" method="post">
             
-            Enter AnimalID:<input type="text" name="animalID" value="">
-            <button type="submit">Submit</button>
+            Enter AnimalID : <input type="text" class="form-control" name="animalID" value="">
+            <br>
+            <button type="submit" class="btn btn-primary">Submit</button>
             
         </form>
         <br>
+        <div class="table-responsive">
+            <table class="anisearchtable table table-bordered ">
+              <thead class="table-dark">
+                <th>Animal ID</th>
+                <th>Name</th>
+                <th>Common Name</th>
+                <th>Bio Name</th>
+                <th>Gender</th>
+                <th>Height</th>
+                <th>Weight</th>
+                <th>Feed ID</th>
+                <th>DOB</th>
+                <th>Cage No</th>
+              </thead>
+              <tbody>
+              </tbody>
+            </table>
+            <br>
+          </div>
     </div>
+
+    <script src="/public/js/anisearch.js"></script>

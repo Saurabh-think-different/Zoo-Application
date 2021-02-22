@@ -1,13 +1,13 @@
-const table = document.querySelector('.empsearchtable')
+const table = document.querySelector('.anisearchtable')
 const tablebody = document.querySelector('tbody')
 
-const inp = document.querySelector('input[name="empid"]')
+const inp = document.querySelector('input[name="animalID"]')
 const subBtn = document.querySelector('button.btn')
 
 
-async function getEmpdata(){
+async function getAnimaldata(){
     
-    const empdata = await fetch('http://localhost:3000/emp_view') 
+    const empdata = await fetch('http://localhost:3000/animals_view') 
     const json = await empdata.json()
 
     json.forEach(emp => {
@@ -23,4 +23,4 @@ async function getEmpdata(){
       })
 }
 
-getEmpdata();
+getAnimaldata();

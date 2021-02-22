@@ -35,7 +35,7 @@ const conn = mysql.createConnection({
     host     : "localhost",
     user     : "root",
     password : "Sausam123",
-    database : "emp",
+    database : "zoo",
     multipleStatements : true,
     insecureAuth : true
 })
@@ -52,3 +52,9 @@ app.listen(process.env.PORT || 3000, () => console.log('Server is live'));
 
 
 // zoo-dbms.heroku-app.com::5002
+
+
+// change db credentials
+// npm i
+//npm run devStart
+// localhost:3000
