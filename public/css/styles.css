@@ -152,8 +152,8 @@ body{
     margin-top: -20%;
   }
 
-  .empsearchtable .anisearchtable{
-    max-width: 80%;
+  .empsearchtable, .anisearchtable, .cagetable{
+    width: 80%;
   }
   .hidden{
     display:none;
@@ -164,6 +164,6 @@ body{
     width: 60px;
     margin: 0 auto;
     justify-content: center;
-    background-color: black;
     
   }
+  

@@ -1,0 +1,30 @@
+<br>
+<h4 style="text-align: center;">Details of Employyes in the Department</h4>
+<div class="table-responsive">
+    <table class="cagetable table table-bordered ">
+      <thead class="table-dark">
+        <th>Dept ID</th>
+        <th>Department Name</th>
+        <th>Employee ID</th>
+        <th>Employee First Name</th>
+        <th>Employee Last Name</th>
+      </thead>
+      <tbody> 
+          <% for( let i = 0; i < data.length; i++ ) { %>
+            <tr>
+                
+                <td><%= data[i].deptid %> </td>
+                <td><%= data[i].dname %></td>
+                <td><%= data[i].empid %></td>
+                <td><%= data[i].fname %></td>
+                <td><%= data[i].lname %></td>
+                 
+              </tr>
+          <% } %>
+          
+
+          
+      </tbody>
+    </table>
+    <br>
+  </div>

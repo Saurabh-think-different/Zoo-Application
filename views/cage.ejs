@@ -1,0 +1,31 @@
+<br>
+<h4 style="text-align: center;">Details of animals in a particular cage and their caretakers.</h4>
+<div class="table-responsive">
+    <table class="cagetable table table-bordered ">
+      <thead class="table-dark">
+        <th>Cage No</th>
+        <th>Animal Name</th>
+        <th>Common Name</th>
+        <th>Feed Type</th>
+        <th>Employee First Name</th>
+        <th>Employee Last Name</th>
+      </thead>
+      <tbody>
+          <% for( let i = 0; i < data.length; i++ ) { %>
+            <tr>
+                
+                <td><%= data[i].cageno%> </td>
+                <td><%= data[i].aname %></td>
+                <td><%= data[i].cname %></td>
+                <td><%= data[i].feedname %></td>
+                <td><%= data[i].EmpFname %></td>
+                <td><%= data[i].EmpLname %></td>  
+              </tr>
+          <% } %>
+          
+
+          
+      </tbody>
+    </table>
+    <br>
+  </div>

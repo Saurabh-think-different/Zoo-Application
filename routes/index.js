@@ -63,18 +63,15 @@ index.get('/tickets_viewTicket', (req, res) =>{
 
 index.post('/tickets_viewTicket/', (req, res) =>{
     
-    const id = req.body.ticketID
-    const sql = `SELECT * ticket WHERE ticketno = "${id}";`
-    const rest =  conn.query(sql, (err, result) =>{
+    const id = req.body.ticketno
+    const sql = `select ticket.ticketno, normal, supreme, datefrom, dateto, datebooked,amount, fname, lname, gender, email from ticket, user where ticket.ticketno = user.ticketno and ticket.ticketno = "${id}";`
+    conn.query(sql, (err, result) =>{
         if(err) throw err
-        res.send(result[0])
-        //res.render('tickets/viewTicket/', {data: result})
+        res.render('tickets/printTicket', {titletag: 'View Ticket', isadmin: false, data: result})
     })
 })
 
-index.get('/tickets_search', (req, res) => {
-    res.render('tickets/searchTicket', {titletag: "Ticket Search", isadmin: false})
-})
+
 
 
 //SignIn Routes
@@ -86,7 +83,7 @@ index.get('/signin', (req, res) => {
 index.post('/admin', (req, res) => {
     const adminEmail = req.body.admin_email
     const adminPass = req.body.admin_pass
-
+    const sql = ``
     if(adminEmail === "admin@email.com" && adminPass === "12345"){
         res.redirect('/admin_dashboard')
     }else{
@@ -96,7 +93,7 @@ index.post('/admin', (req, res) => {
 
 index.get('/admin_dashboard', (req, res) => {
     const date = new Date()
-    const sql = `select SUM(amount) as sum, COUNT(normal) as cn, COUNT(supreme) as cs from ticket where datebooked="${dateFormat(date, 'yyyy-mm-dd')}";`
+    const sql = `select SUM(amount) as sum, SUM(normal) as cn, SUM(supreme) as cs from ticket where datebooked="${dateFormat(date, 'yyyy-mm-dd')}";`
     conn.query(sql, (err, result) => {
         if(err) throw err
         // result ==== [ RowDataPacket { 'cnt': 15 } ]
@@ -361,14 +358,27 @@ index.post('/search', (req, res) => {
     const sql = `SELECT * FROM ticket WHERE ticketno = "${id}";`
     conn.query(sql, (err, result) =>{
     if(err) throw err
-    res.send(result[0])
-    //res.render('tickets/viewTicket/', {data: result})
+    //res.send(result[0])
+    res.render('tickets/viewTicket2', {titletag: "Tickets", isadmin: true, data: result})
 })
 })
 
 
-index.get('/admin_feedback', (req, res) => {
-    res.render('admin/index', {titletag: "Admin Dashboard", isadmin: true})
+index.get('/dept', (req, res) =>{
+    const sql = `SELECT dept.deptid, dept.dname, employee.empid,employee.fname,employee.lname FROM dept INNER JOIN employee ON dept.deptid=employee.deptid;`
+    conn.query(sql, (err, result) => {
+        console.log(result)
+        res.render('dept', {titletag: "Department", isadmin: true, data: result} )
+    })
+    
+})
+
+index.get('/cage', (req, res) =>{
+    const sql = `select cage.cageno, aname, cname, feedname, fname as EmpFname, lname as EmpLname from cage, animal, feedtype, employee where cage.cageno=animal.cageno and cage.feedid=feedtype.feedid and cage.empid1=employee.empid union select cage.cageno, aname, cname, feedname, fname as EmpFname, lname as EmpLname from cage, animal, feedtype, employee where cage.cageno=animal.cageno and cage.feedid=feedtype.feedid and cage.empid2=employee.empid order by cageno;`
+    conn.query(sql, (err, result)=>{
+        //console.log(result)
+        res.render('cage', {titletag: "Cage", isadmin: true, data: result})
+    })
 })
 
 module.exports = index

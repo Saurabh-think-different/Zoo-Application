@@ -1,5 +1,5 @@
 
-<h1 style="color:green; text-align: center;">Successfully Booked Ticket</h1>
+<h1 style="color:green; text-align: center;">Your Booked Ticket</h1>
 
 
 <div class="showcase">
@@ -7,35 +7,35 @@
     <table>
         <tr>
             <td><h3>Ticket No: </h3></td>
-            <td><span><h5><%= tno %></h5></span></td>
+            <td><span><h5><%= data[0].ticketno %></h5></span></td>
         </tr>
         <tr>
             <td><h3>First Name: </h3></td>
-            <td><h5><%= data.fname %></h5> </td>
+            <td><h5><%= data[0].fname %></h5> </td>
         </tr>
         <tr>
             <td><h3>Last Name: </h3></td>
-            <td><h5><%= data.lname %></h5> </td>
+            <td><h5><%= data[0].lname %></h5> </td>
         </tr>
         <tr>
             <td><h3>Gender: </h3></td>
-            <td><h5><%= data.gender %></h5></td>
+            <td><h5><%= data[0].gender %></h5></td>
         </tr>
         <tr>
             <td><h3>Email: </h3></td>
-            <td><h5><%= data.email %></h5> </td>
+            <td><h5><%= data[0].email %></h5> </td>
         </tr>
         <tr>
             <td><h3>Normal: </h3></td>
-            <td><h5><%= data.normal %></h5> </td>
+            <td><h5><%= data[0].normal %></h5> </td>
         </tr>
         <tr>
             <td><h3>Supreme: </h3></td>
-            <td><h5><%= data.supreme %></h5> </td>
+            <td><h5><%= data[0].supreme %></h5> </td>
         </tr>
         <tr>
             <td><h3>Total Amount: </h3></td>
-            <td><h4><%= amt %></h4> </td>
+            <td><h4><%= data[0].amount %></h4> </td>
         </tr>
         
         
@@ -43,8 +43,8 @@
     </table>
     
 </div>
+<br>
 
-
-    <a href="/tickets" class="btn btn-info backbtn">Back</a>
+    <a href="/tickets" class="btn btn-primary backbtn">BACK</a>
 
 <br>

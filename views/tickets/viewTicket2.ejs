@@ -1,0 +1,58 @@
+<section id="options">
+    <div class="container">
+      <br>
+      <form action="/search" method="post">
+        View Ticket: <input type="text" name="ticketno" id="">
+        <button type="submit">Check</button>
+      </form>
+
+      <br>
+      
+    </div>
+</section>
+<br>
+    <h1 style="color:green; text-align: center;">Ticket Details for Ticket No: <%= data[0].ticketno %>  </h1>
+
+    <div class="showcase">
+    
+        <table>
+            <tr>
+                <td><h3>Ticket No: </h3></td>
+                <td><span><h5><%= data[0].ticketno %></h5></span></td>
+            </tr>
+            <tr>
+                <td><h3>Normal: </h3></td>
+                <td><h5><%= data[0].normal %></h5> </td>
+            </tr>
+            <tr>
+                <td><h3>Supreme: </h3></td>
+                <td><h5><%= data[0].supreme %></h5> </td>
+            </tr>
+            <tr>
+                <td><h3>Date From: </h3></td>
+                <td><h5><%= new Intl.DateTimeFormat('en-GB', { year: 'numeric', month: 'long', day: '2-digit'}).format(data[0].datefrom) %></h5></td>
+            </tr>
+            <tr>
+                <td><h3>Date To: </h3></td>
+                <td><h5><%= new Intl.DateTimeFormat('en-GB', { year: 'numeric', month: 'long', day: '2-digit'}).format(data[0].dateto) %></h5> </td>
+            </tr>
+            <tr>
+                <td><h3>Date Booked: </h3></td>
+                <td><h5><%= new Intl.DateTimeFormat('en-GB', { year: 'numeric', month: 'long', day: '2-digit'}).format(data[0].datebooked) %></h5> </td>
+            </tr>
+            <tr>
+                <td><h3>Total Amount: </h3></td>
+                <td><h4><%= data[0].amount %></h4> </td>
+            </tr>
+            
+            
+
+        </table>
+    
+    </div>
+    <br>
+    <a href="/tickets" class="btn btn-primary backbtn">BACK</a>
+    <br>
+    
+
+
