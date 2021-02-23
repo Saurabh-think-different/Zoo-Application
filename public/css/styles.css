@@ -124,26 +124,17 @@ body{
     margin: 0 auto;
   }
   
+  tr{
+    background-color: rgb(241, 236, 236);
+  }
+
   .showcase{
     display: flex;
     width: 100%;
     justify-content: center;
   }
 
-  .btn{
-    
-    padding: 5px 20px;
-    background-color: green;
-    border-radius: 5px;
-    display: flex;
-    justify-content: center;
-    width: 100px;
-  }
-  .btn a{
-    text-decoration: none;
-    font-size: 2rem;
-    color: #fff;
-  }
+  
 
   .form-control{
     width: 20%;
@@ -159,4 +150,20 @@ body{
 
   .typeoftickets h1{
     margin-top: -20%;
+  }
+
+  .empsearchtable .anisearchtable{
+    max-width: 80%;
+  }
+  .hidden{
+    display:none;
+  }
+
+  .backbtn{
+    display:flex;
+    width: 60px;
+    margin: 0 auto;
+    justify-content: center;
+    background-color: black;
+    
   }

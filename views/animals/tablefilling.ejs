@@ -1,0 +1,62 @@
+<h2 class="container">Search Animal Details</h2>
+
+    <div class="container">
+        <br>
+        <form action="/animals_search" method="post">
+            
+            Enter AnimalID : <input type="text" class="form-control" name="aid" value="">
+            
+            <button type="submit" class="btn btn-primary">Submit</button>
+            
+        </form>
+        <br>
+        <div class="table-responsive">
+            <table class="anisearchtable table table-bordered ">
+              <thead class="table-dark">
+                <th>Animal ID</th>
+                <th>Name</th>
+                <th>Common Name</th>
+                <th>Bio Name</th>
+                <th>Gender</th>
+                <th>Height</th>
+                <th>Weight</th>
+                <th>Feed ID</th>
+                <th>DOB</th>
+                <th>Cage No</th>
+                
+                <th>Delete</th>
+              </thead>
+              <tbody>
+                
+                  <tr>
+                    <td><%= data[0].aid %> </td>
+                    <td><%= data[0].aname %> </td>
+                    <td><%= data[0].cname %></td>
+                    <td><%= data[0].bioname %></td>
+                    <td><%= data[0].gender %></td>
+                    <td><%= data[0].ht  %></td>
+                    <td><%= data[0].wt    %></td>
+                    <td><%= data[0].feedid    %></td>
+                    <td><%= new Intl.DateTimeFormat('en-GB', { year: 'numeric', month: 'long', day: '2-digit'}).format(data[0].dob) %></td>
+                    <td><%= data[0].cageno %></td>
+                    <form action="/animal_del/<%= data[0].aid %>" method="post">
+            
+                       
+                        <td><button type="submit" class="btn btn-danger" id="delete">Delete</button></td>
+                    </form>
+                  </tr>
+               
+              </tbody>
+
+            </table>
+            <br>
+          </div>
+        
+    </div>
+
+    <script>
+        const btn = document.querySelector('#delete')
+        btn.addEventListener('click', (e)=>{
+          const r = confirm('Data will be deleted!')
+        })
+      </script>

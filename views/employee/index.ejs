@@ -8,4 +8,46 @@
         </ul>
       </nav>
     </div>
+    <br>
+    <div class="table-responsive">
+      <h4 style="text-align: center;">List of Table of Employees</h4>
+      <table class="empsearchtable table table-bordered ">
+        <thead class="table-dark">
+          <th>EmpID</th>
+          <th>FName</th>
+          <th>LName</th>
+          <th>Gender</th>
+          <th>House No</th>
+          <th>Street Name</th>
+          <th>Area</th>
+          <th>City</th>
+          <th>Zip</th>
+          <th>Phone</th>
+          <th>DOB</th>
+          <th>Dept</th>
+          <th>Salary</th>
+        </thead>
+        <tbody>
+          <% for( let i = 0; i < data.length; i++ ) { %>
+            <tr>
+              <td><%= data[i].empid %> </td>
+              <td><%= data[i].fname %> </td>
+              <td><%= data[i].lname %></td>
+              <td><%= data[i].gender %></td>
+              <td><%= data[i].houseno %></td>
+              <td><%= data[i].stname  %></td>
+              <td><%= data[i].area    %></td>
+              <td><%= data[i].city    %></td>
+              <td><%= data[i].zipcode %></td>
+              <td><%= data[i].phno    %></td>
+              <td><%= new Intl.DateTimeFormat('en-GB', { year: 'numeric', month: 'long', day: '2-digit'}).format(data[i].dob) %></td>
+              <td><%= data[i].deptid  %></td>
+              <td><%= data[i].salary  %></td>
+            </tr>
+          <% } %>
+
+        </tbody>
+      </table>
+      <br>
+    </div>
   </section>

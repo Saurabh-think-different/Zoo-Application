@@ -1,7 +1,7 @@
 
 <h2 class="container">Add Employee</h2>
 <br>
-    <form class="container" action="/emp_add" method="POST">
+    <form class="container" action="/emp_add/<%=empid%>" method="POST">
       <table>
         
          <tr>
@@ -9,11 +9,11 @@
              First name:
            </td>
            <td>
-             <input type="text" name="fname" value="">
+             <input type="text" name="fname" value="<%= data.fname %>">
            </td>
            <td>
              Last name:
-             <input type="text" name="lname" value="">
+             <input type="text" name="lname" value="<%= data.lname %>">
            </td>
          </tr>
          <tr>
@@ -31,7 +31,7 @@
            </td>
            <td>
              House No.:
-             <input type="text" name="houseno" value="">
+             <input type="text" name="houseno" value="<%= data.houseno %>">
            </td>
           </tr>
            <tr>
@@ -39,7 +39,7 @@
               </td>
              <td>
                St. Name:
-               <input type="text" name="stname" value="">
+               <input type="text" name="stname" value="<%= data.stname %>">
              </td>
           </tr>
           <tr>
@@ -47,7 +47,7 @@
              </td>
             <td>
               Area:
-              <input type="text" name="area" value="">
+              <input type="text" name="area" value="<%= data.area %>">
             </td>
          </tr>
          <tr>
@@ -55,7 +55,7 @@
             </td>
            <td>
              City:
-             <input type="text" name="city" value="">
+             <input type="text" name="city" value="<%= data.city %>">
            </td>
         </tr>
         <tr>
@@ -63,7 +63,7 @@
            </td>
           <td>
             Zipcode:
-            <input type="text" name="zipcode" value="">
+            <input type="text" name="zipcode" value="<%= data.zipcode %>">
           </td>
        </tr>
          <tr>
@@ -71,7 +71,7 @@
              Phone no.:
            </td>
            <td>
-             <input type="Phone" name="phno" value="">
+             <input type="Phone" name="phno" value="<%= data.phno %>">
            </td>
          </tr>
 
@@ -80,7 +80,7 @@
              Date of Birth:
            </td>
            <td>
-             <input type="Date" name="dob" value="">
+             <input type="Date" name="dob" value="<%= data.dob %>">
            </td>
          </tr>
          <tr>
@@ -88,7 +88,7 @@
              Department:
             </td>
            <td>
-             <input type="text" name="deptid" value="">
+             <input type="text" name="deptid" value="<%= data.deptid %>">
            </td>
         </tr>
         <tr>
@@ -96,7 +96,7 @@
             Salary:
           </td>
           <td>
-            <input type="Phone" name="salary" value="">
+            <input type="Phone" name="salary" value="<%= data.salary %>">
           </td>
         </tr>
         <tr>

@@ -8,4 +8,40 @@
         </ul>
       </nav>
     </div>
+    <br>
+    <h4 style="text-align: center;">List of Table of Animals</h4>
+        <div class="table-responsive">
+            <table class="anisearchtable table table-bordered ">
+              <thead class="table-dark">
+                <th>Animal ID</th>
+                <th>Name</th>
+                <th>Common Name</th>
+                <th>Bio Name</th>
+                <th>Gender</th>
+                <th>Height</th>
+                <th>Weight</th>
+                <th>Feed ID</th>
+                <th>DOB</th>
+                <th>Cage No</th>
+              </thead>
+              <tbody>
+                <% for( let i = 0; i < data.length; i++ ) { %>
+                  <tr>
+                    <td><%= data[i].aid %> </td>
+                    <td><%= data[i].aname %> </td>
+                    <td><%= data[i].cname %></td>
+                    <td><%= data[i].bioname %></td>
+                    <td><%= data[i].gender %></td>
+                    <td><%= data[i].ht  %></td>
+                    <td><%= data[i].wt    %></td>
+                    <td><%= data[i].feedid    %></td>
+                    <td><%= new Intl.DateTimeFormat('en-GB', { year: 'numeric', month: 'long', day: '2-digit'}).format(data[i].dob) %></td>
+                    <td><%= data[i].cageno %></td>
+                  </tr>
+                <% } %>
+              </tbody>
+
+            </table>
+            <br>
+          </div>
   </section>

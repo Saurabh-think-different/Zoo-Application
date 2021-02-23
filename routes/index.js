@@ -108,7 +108,11 @@ index.get('/admin_dashboard', (req, res) => {
 
 //Employee App
 index.get('/employee', (req, res) => {
-    res.render('employee/index', {titletag: "Employee", isadmin: true})
+    const sql = `SELECT * FROM employee;`
+    conn.query(sql, (err, result) =>{
+        if(err) throw err
+        res.render('employee/index', {titletag: "Employee", isadmin: true, data: result})
+    })
 })
 
 index.get('/emp_add', (req, res) => {
@@ -117,11 +121,10 @@ index.get('/emp_add', (req, res) => {
 })
 
 index.post('/emp_add', (req, res) => {
-
     const data = req.body
     let empID = 0
     // data.empID = "emp" + empID
-    const sql = `INSERT INTO employee (fname, lname, gender, houseno, stname, area, city, zipcode, phno, dob, deptid, salary ) VALUES ("${data.fname}", "${data.lname}", "${data.gender}", ${data.house}, "${data.st_name}", "${data.area}", "${data.city}", ${data.zip}, ${data.phone}, "${data.dob}", "${data.deptID}", ${data.salary} )`
+    const sql = `INSERT INTO employee (fname, lname, gender, houseno, stname, area, city, zipcode, phno, dob, deptid, salary ) VALUES ("${data.fname}", "${data.lname}", "${data.gender}", ${data.houseno}, "${data.stname}", "${data.area}", "${data.city}", ${data.zipcode}, ${data.phno}, "${data.dob}", "${data.deptid}", ${data.salary} )`
     const sql2 = `select (empID) as empID from employee order by empID desc limit 1;` //Last emp inserted
     conn.query(sql2, (err, res) => {
         if(err) throw err;
@@ -133,12 +136,35 @@ index.post('/emp_add', (req, res) => {
     })
     conn.query(sql,  (err, result)=> {
         if (err) throw err;
-        console.log(data)
+        //console.log(data)
         res.render('employee/addedemp', {titletag: "Emp Add", isadmin: true, data: data, empID: empID})
         // empID += 1
         //console.log("Number of employee records inserted: " + result.affectedRows);
       });
 })
+
+index.get('/emp_add/:id', (req, res) => {
+    const empid = req.params.id
+    const sql = `SELECT * FROM employee WHERE empid = "${empid}"`
+
+    conn.query(sql, (err, result)=>{
+        if(err) throw err
+        //console.log(result)
+        res.render('employee/empAddMod', {titletag: "Modify Details", isadmin: true,empid: empid, data: result[0]})
+
+    })
+})
+
+index.post('/emp_add/:id', (req, res) => {
+    const data = req.body;
+    const empid = req.params.id
+    const sql = `UPDATE employee SET fname="${data.fname}", lname="${data.lname}", gender="${data.gender}", houseno="${data.houseno}",stname="${data.stname}",area="${data.area}",city="${data.city}",zipcode="${data.zipcode}",phno="${data.phno}",dob="${data.dob}",deptid="${data.deptid}",salary="${data.salary}" WHERE empid = ${empid};`
+    conn.query(sql, (err, result)=>{
+        if(err) throw err
+        res.render('employee/empModded', {titletag: "Modify Details", isadmin: true})
+    })
+})
+
 
 index.get('/emp_view', (req, res) => {
     const sql = `SELECT * FROM employee;`
@@ -164,22 +190,42 @@ index.get('/emp_modify', (req, res) => {
 })
 
 index.post('/emp_modify', (req, res) => {
-    
+    const empid = req.body.empid
+    res.redirect(`/emp_add/${empid}`)
 })
 
 index.get('/emp_search', (req, res) => {
     res.render('employee/search', {titletag: "Emp Search", isadmin: true})
 })
 
-// index.post('/emp_search', (req, res) => {
-//     console.log(req.body.empid)
-// })
+index.post('/emp_search', (req, res) => {
+    const empid = req.body.empid
+    const sql = `SELECT * FROM employee WHERE empid = ${empid};`
+    const rest =  conn.query(sql, (err, result) =>{
+        if(err) throw err
+        res.render('employee/tablefilling', {titletag: "Emp Search", isadmin: true, data:result})
+        //res.render('tickets/viewTicket/', {data: result})
+    })
+})
 
+index.post('/emp_del/:id', (req, res) => {
+    const id = req.params.id
+    const sql = `delete from employee where empid = ${id}`
+    conn.query(sql, (err, result)=>{
+        if (err) throw err
+        //console.log(`deleted empid ${id}`)
+        res.redirect('/emp_search')
+    })
+})
 
 
 //ANIMALS
 index.get('/animals', (req, res) => {
-    res.render('animals/index', {titletag: "Admin Dashboard", isadmin: true})
+    const sql = `SELECT * FROM animal;`
+    const rest =  conn.query(sql, (err, result) =>{
+        if(err) throw err
+        res.render('animals/index', {titletag: "Admin Dashboard", isadmin: true, data: result})
+    })
 })
 
 index.get('/animals_add', (req, res) => {
@@ -189,37 +235,45 @@ index.get('/animals_add', (req, res) => {
 index.post('/animals_add', (req, res) => {
     
     const data = req.body
-    data.aniID = "ani" + data.empID + aniID
-    
-    const sql = `INSERT INTO animal (name, bio_name, gender, height, weight, feed_id, dob, category, cage_id, animal_id) VALUES ("${data.name}", "${data.bioname}", "${data.gender}", ${data.height}, ${data.weight}, "${data.type}", "${data.dob}", "${data.category}", "${data.cageno}", "${data.aniID}" )`
-    
+    let aid = 0
+    const sql = `INSERT INTO animal (aname,cname, bioname, gender, ht, wt, feedid, dob, cageno) VALUES ("${data.aname}","${data.cname}", "${data.bioname}", "${data.gender}", ${data.ht}, ${data.wt}, "${data.feedid}", "${data.dob}", "${data.cageno}")`
+    const sql2 = `select (aid) as aid from animal order by aid desc limit 1;` //Last emp inserted
+    conn.query(sql2, (err, res) => {
+        if(err) throw err;
+        if(!res){
+            aid = 1
+        }else{
+            aid = Number(res[0].aid) + 1
+        }
+    }) 
     conn.query(sql,  (err, result)=> {
         if (err) throw err;
-        res.send("done!")
-        aniID += 1
-        console.log("Number of animal records inserted: " + result.affectedRows);
+        res.render("animals/animaladded", {titletag: "success", isadmin: true, data: data, aid: aid})
       });
 })
 
 index.get('/animals_add/:id', (req, res) => {
     const id = req.params.id
-    const sql = `SELECT * FROM animal WHERE animal_id = "${id}"`
+    const sql = `SELECT * FROM animal WHERE aid = "${id}"`
 
     conn.query(sql, (err, result)=>{
         if(err) throw err
-        
-        res.render('animals/aniAddMod', {titletag: "Modify Details", isadmin: true,id: id, name: result[0].name, bioname: result[0].bio_name, height: result[0].height, weight: result[0].weight, type: result[0].feed_id, dob: result[0].dob, cageno: result[0].cage_id, empID: result[0].empID})
+        //console.log(result)
+        res.render('animals/aniAddMod', {titletag: "Modify Details", isadmin: true,id: id, data: result[0]})
 
     })
 
     
 })
 
-index.post('animals_add/:id', (req, res) => {
-    const values = req.body;
+index.post('/animals_add/:id', (req, res) => {
+    const data = req.body;
     const id = req.params.id
-    const sql = `UPDATE animal SET  WHERE aid = ${id} `
-
+    const sql = `UPDATE animal SET aname="${data.aname}", cname="${data.cname}", bioname="${data.bioname}", gender="${data.gender}",ht="${data.ht}",wt="${data.wt}",feedid="${data.feedid}",dob="${data.dob}",cageno="${data.cageno}" WHERE aid = ${id};`
+    conn.query(sql, (err, result)=>{
+        if(err) throw err
+        res.render('animals/aniModded', {titletag: "Modify Details", isadmin: true})
+    })
 })
 
 index.get('/animals_view', (req, res) => {
@@ -256,8 +310,24 @@ index.get('/animals_search', (req, res) => {
 })
 
 index.post('/animals_search', (req, res) => {
-    const aniID = req.body.animalID
-    res.redirect(`/animals_view/${aniID}`)
+    const aid = req.body.aid
+    const sql = `SELECT * FROM animal WHERE aid = "${aid}";`
+    conn.query(sql, (err, result) =>{
+        if(err) throw err
+        res.render('animals/tablefilling', {titletag: 'Animals Search', isadmin: true, data: result})
+        //res.render('tickets/viewTicket/', {data: result})
+    })
+
+})
+
+index.post('/animal_del/:id', (req, res) => {
+    const id = req.params.id
+    const sql = `delete from animal where aid = ${id}`
+    conn.query(sql, (err, result)=>{
+        if (err) throw err
+        //console.log(`deleted empid ${id}`)
+        res.redirect('/animals_search')
+    })
 })
 
 
@@ -272,7 +342,7 @@ index.post('/report', (req, res) => {
     const datefrom = req.body.datefrom
     const dateto = req.body.dateto
     // console.log(req.body)
-    const sql = `SELECT * FROM ticket WHERE Dateto BETWEEN "${datefrom}" AND "${dateto}";`
+    const sql = `SELECT * FROM ticket WHERE Datefrom >= "${datefrom}" AND Dateto <= "${dateto}";`
     conn.query(sql, (err, result)=>{
         if(err) throw err
         // console.log(result)

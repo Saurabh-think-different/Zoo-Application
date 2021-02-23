@@ -8,13 +8,19 @@
          Animal name:
        </td>
        <td>
-         <input type="text" name="name" value="<%= name %>"
+         <input type="text" name="aname" value="<%= data.aname %>">
         </td>
+        <td>
+          Common name:
+        </td>
+        <td>
+          <input type="text" name="cname" value="<%= data.cname %>">
+         </td>
         <td>
           Biological name:
         </td>
         <td>
-          <input type="text" name="bioname" value="<%= bioname %>"
+          <input type="text" name="bioname" value="<%= data.bioname %>">
          </td>
      </tr>
      <tr>
@@ -32,7 +38,7 @@
          Height:
        </td>
        <td>
-         <input type="Phone" name="height" value="<%= height %>">
+         <input type="Phone" name="ht" value="<%= data.ht %>">
        </td>
      </tr>
 
@@ -41,16 +47,16 @@
          Weight:
        </td>
        <td>
-         <input type="Phone" name="weight" value="<%= weight %>">
+         <input type="Phone" name="wt" value="<%= data.wt %>">
        </td>
      </tr>
 
      <tr>
        <td>
-         Feed Type:
+         Feed ID:
        </td>
        <td>
-         <input type="text" name="type" value="<%= type %>">
+         <input type="text" name="feedid" value="<%= data.feedid %>">
        </td>
      </tr>
 
@@ -59,39 +65,20 @@
          Date of Birth:
        </td>
        <td>
-         To:
-         <input type="Date" name="dob" value="<%= dob %>">
+         
+         <input type="Date" name="dob" value="<%= data.dob %>">
        </td>
      </tr>
-     <tr>
-       <td>
-         Category:
-        </td>
-       <td>
-         <select>
-           <option name="category" value="Mammal">Mammal</option>
-           <option name="category" value="Bird">Bird</option>
-           <option name="category" value="Reptile">Reptile</option>
-           <option name="category" value="Fish">Fish</option>
-          </select>
-       </td>
-    </tr>
+     
     <tr>
       <td>
         Cage No.:
       </td>
       <td>
-        <input type="Phone" name="cageno" value="<%= cageno %>">
+        <input type="Phone" name="cageno" value="<%= data.cageno %>">
       </td>
     </tr>
-    <tr>
-      <td>
-        EmpID:
-      </td>
-      <td>
-        <input type="Phone" name="empID" value="<%= empID %>">
-      </td>
-    </tr>
+    
     <tr>
       <td>
         <button type="submit">Submit</button>
